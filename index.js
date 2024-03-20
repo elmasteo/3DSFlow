@@ -142,6 +142,7 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
           };
       }else{
         document.getElementById('formulario').style.display = 'block';
+        document.getElementById('loader').style.display = 'none';
         document.getElementById('result').style.display = 'block';
         document.getElementById('result').innerHTML = JSON.stringify(result, null, 2);
         alert("Review your fields");
@@ -255,6 +256,7 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
 
         }else{
             document.getElementById('formulario').style.display = 'block';
+            document.getElementById('loader').style.display = 'none';
             document.getElementById('result').style.display = 'block';
             document.getElementById('result').innerHTML = JSON.stringify(resultInitPayment, null, 2);
             alert("Something went wrong!!");
@@ -283,6 +285,7 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
               var cReq = resultPayment.paymentOption.card.threeD.cReq;
               if(!acsUrl || !cReq){
                 document.getElementById('formulario').style.display = 'block';
+                document.getElementById('loader').style.display = 'none';
                 document.getElementById('result').style.display = 'block';
                 document.getElementById('result').innerHTML = JSON.stringify(resultPayment, null, 2);
               }else{
@@ -294,6 +297,7 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
 
           }else{
             document.getElementById('formulario').style.display = 'block';
+            document.getElementById('loader').style.display = 'none';
             document.getElementById('result').style.display = 'block';
             document.getElementById('result').innerHTML = JSON.stringify(resultPayment, null, 2);
             alert("Something went wrong!!");
