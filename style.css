@@ -68,5 +68,29 @@
             gap: 20px;
         }
 
+        .loader {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            margin-top: 20px;
+            width: 150px;
+            height: 150px;
+            border: 15px solid #FFF;
+            border-bottom-color: #081f2c;
+            border-radius: 50%;
+            display: flex;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+            }
+
+            @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+            }
+
         
     

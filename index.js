@@ -50,6 +50,9 @@ var validate_inputs=document.querySelectorAll(".right-side input");
 
 function obtenerDatos(){
 
+     document.getElementById('formulario').style.display = 'none';
+     document.getElementById('loader').style.display = 'block';
+
     document.getElementById('result').innerHTML = '';
     var environment = document.getElementById('environment').value;
     var merchant_secret_key = document.getElementById('merchant_secret_key').value;
@@ -138,6 +141,7 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
             redirect: 'follow'
           };
       }else{
+        document.getElementById('formulario').style.display = 'block';
         document.getElementById('result').style.display = 'block';
         document.getElementById('result').innerHTML = JSON.stringify(result, null, 2);
         alert("Review your fields");
@@ -250,6 +254,7 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
         });
 
         }else{
+            document.getElementById('formulario').style.display = 'block';
             document.getElementById('result').style.display = 'block';
             document.getElementById('result').innerHTML = JSON.stringify(resultInitPayment, null, 2);
             alert("Something went wrong!!");
@@ -277,6 +282,7 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
               var acsUrl = resultPayment.paymentOption.card.threeD.acsUrl;
               var cReq = resultPayment.paymentOption.card.threeD.cReq;
               if(!acsUrl || !cReq){
+                document.getElementById('formulario').style.display = 'block';
                 document.getElementById('result').style.display = 'block';
                 document.getElementById('result').innerHTML = JSON.stringify(resultPayment, null, 2);
               }else{
@@ -287,6 +293,7 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
               
 
           }else{
+            document.getElementById('formulario').style.display = 'block';
             document.getElementById('result').style.display = 'block';
             document.getElementById('result').innerHTML = JSON.stringify(resultPayment, null, 2);
             alert("Something went wrong!!");

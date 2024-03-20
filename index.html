@@ -13,7 +13,7 @@
 </header>
 <div class="container">
   <img class="image" src="https://cdn.paymentez.com/img/nv/nuvei_logo.png">
-    <form>
+    <form id="formulario" >
         <label for="environment">Environment:</label>
         <select id="environment">
           <option value="#">Select</option>
@@ -77,6 +77,7 @@
         <input type="button" value="Enviar" onclick="obtenerDatos()">
 
     </form>
+    <span class="loader" id="loader" style="display:none"></span>
 
    <div id="result" style="display:none"></div> 
 </div>
