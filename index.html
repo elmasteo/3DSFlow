@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>3DS FLOW + NUVEI</title>
+    <link href="https://paymentez.github.io/api-doc/images/favicon-d165b374.svg" rel="icon" type="image/svg">
+    <meta charset="UTF-8">
+    <meta name="title" content="Test Nuvei">
+    <meta name="description" content="Descripción de la WEB">
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+<body>
+<header>
+</header>
+<div class="container">
+  <img class="image" src="https://cdn.paymentez.com/img/nv/nuvei_logo.png">
+    <form>
+        <label for="environment">Environment:</label>
+        <select id="environment">
+          <option value="#">Select</option>
+          <option value="https://secure.safecharge.com/ppp/api/v1/getSessionToken.do">PROD</option>
+          <option value="https://ppp-test.nuvei.com/ppp/api/v1/getSessionToken.do">TEST</option>
+        </select>
+
+        <input type="password" id="merchant_secret_key" name="merchant_secret_key" placeholder="Merchant Secret Key" required>
+
+        <input type="text" id="merchant_id" name="merchant_id" placeholder="Merchant ID" required>
+
+        <input type="text" id="merchant_site_id" name="merchant_site_id" placeholder="Merchant Site ID" required>
+
+        <input type="text" id="client_request_id" name="client_request_id" placeholder="Client Request ID" required>
+
+        <input type="number" id="amount" name="amount" placeholder="Amount" required>
+
+      <label for="currency">Currency:</label>
+        <select id="currency">
+          <option value="#">Select</option>
+          <option value="COP">COP</option>
+          <option value="CLP">CLP</option>
+          <option value="MXN">MXN</option>
+          <option value="PEN">PEN</option>
+          <option value="USD">USD</option>
+        </select>
+
+<div class="container2">
+    <div class="card">
+        <div class="form">
+            <div class="right-side">
+              <label>Card Details</label>
+                <div class="input-text">
+                  
+                    <input type="text" id="cardHolderName" placeholder="Card Holder Name" require>
+                    
+                </div>
+                <div class="input-text">
+                    <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" data-slots="0" data-accept="\d" require>
+                    
+                </div> 
+                <div class="input-div">
+                    <div class="input-text">
+                       <input type="text" id="expirationMonth" placeholder="MM" data-slots="MM" require>
+
+                       <input type="text" id="expirationYear" placeholder="YYYY" data-slots="YYYY" require>
+                       
+                    </div>
+                    <div class="input-text">
+                       <input type="text" id="CVV" placeholder="000" data-slots="0" data-accept="\d" size="3" require>
+                       
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="text" id="notification_url" name="notification_url" placeholder="Notification URL" required>
+
+        <input type="button" value="Enviar" onclick="obtenerDatos()">
+
+    </form>
+
+   <div id="result" style="display:none"></div> 
+</div>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
+
+        <script src="index.js"></script>
+    </body>  
+</html>
+
