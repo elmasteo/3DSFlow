@@ -317,8 +317,9 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
                   }
                 };
 
-                const encodedTransactionData = encodeURIComponent(btoa(JSON.stringify(transactionData)));
-                const encodedSecret = encodeURIComponent(btoa(merchant_secret_key));
+                const transactionDataStr = JSON.stringify(transactionData);
+                const encodedTransactionData = encodeURIComponent(btoa(unescape(encodeURIComponent(transactionDataStr))));
+                const encodedSecret = encodeURIComponent(btoa(unescape(encodeURIComponent(merchant_secret_key))));
 
                 // Redirección final tras completar 3DS
                 const callbackUrl = `https://3dsnuveiflow.netlify.app/.netlify/functions/cres-entrypoint?data=${encodedTransactionData}&key=${encodedSecret}`;
