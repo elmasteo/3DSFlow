@@ -10,13 +10,12 @@ exports.handler = async (event) => {
       <h2>Procesando validación 3DS...</h2>
       <pre id="output"></pre>
       <script>
-        (async () => {
-          function fromBase64(str) {
+      (async () => {
+        function fromBase64(str) {
           str = str.replace(/-/g, '+').replace(/_/g, '/');
           while (str.length % 4) str += '=';
           return decodeURIComponent(escape(atob(str)));
         }
-
 
         const params = new URLSearchParams(window.location.search);
         const cres = params.get("cres");
@@ -25,17 +24,17 @@ exports.handler = async (event) => {
 
         const output = document.getElementById("output");
 
+        if (!encodedTransactionData || !encodedSecret || !cres) {
+          output.textContent = "Faltan parámetros requeridos en la URL.";
+          return;
+        }
+
         try {
           const transactionData = JSON.parse(fromBase64(encodedTransactionData));
           const merchantSecretKey = fromBase64(encodedSecret);
 
           console.log("transactionData:", transactionData);
           console.log("merchantSecretKey:", merchantSecretKey);
-
-          if (!cres || !transactionData || !merchantSecretKey) {
-            output.textContent = "Faltan datos.";
-            return;
-          }
 
           const res = await fetch("/.netlify/functions/cres-handler", {
             method: "POST",
@@ -48,9 +47,9 @@ exports.handler = async (event) => {
         } catch (err) {
           output.textContent = "Error al procesar el pago: " + err.message;
         }
-
-        })();
+      })();
       </script>
+
     </body>
     </html>
   `;
