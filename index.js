@@ -61,7 +61,6 @@ function obtenerDatos(){
     var merchant_id = document.getElementById('merchant_id').value;
     var client_request_id = document.getElementById('client_request_id').value;
     var currency = document.getElementById('currency').value;
-    var notification_url = document.getElementById('notification_url').value;
     var cardNumber = document.getElementById('cardNumber').value;
     var cardHolderName = document.getElementById('cardHolderName').value;
     var expirationMonth = document.getElementById('expirationMonth').value;
