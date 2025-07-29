@@ -1,0 +1,50 @@
+<!-- public/cres-callback.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Procesando pago</title>
+</head>
+<body>
+  <h2>Procesando su pago...</h2>
+  <pre id="output"></pre>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const cres = urlParams.get('cres');
+
+      const output = document.getElementById('output');
+
+      if (!cres) {
+        output.textContent = 'Error: No se encontró el parámetro CRES.';
+        return;
+      }
+
+      const transactionDataRaw = localStorage.getItem('nuvei_final_payload');
+
+      if (!transactionDataRaw) {
+        output.textContent = 'Error: No se encontró información previa de la transacción.';
+        return;
+      }
+
+      try {
+        const transactionData = JSON.parse(transactionDataRaw);
+
+        const response = await fetch('/.netlify/functions/cres-handler', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ cres, transactionData })
+        });
+
+        const result = await response.json();
+        output.textContent = JSON.stringify(result, null, 2);
+      } catch (err) {
+        output.textContent = 'Error al procesar el pago: ' + err.message;
+      }
+    });
+  </script>
+</body>
+</html>
