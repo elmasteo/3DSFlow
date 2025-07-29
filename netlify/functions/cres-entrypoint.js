@@ -19,8 +19,8 @@ exports.handler = async (event) => {
 
         const params = new URLSearchParams(window.location.search);
         const cres = params.get("cres");
-        const encodedTransactionData = sessionStorage.getItem("transactionData");
-        const encodedSecret = sessionStorage.getItem("merchantSecretKey");
+        const encodedTransactionData = params.get("data");
+        const encodedSecret = params.get("key");
 
         const output = document.getElementById("output");
 
