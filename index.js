@@ -125,7 +125,7 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
                     "expirationYear": expirationYear,
                     "CVV": CVV,
                     "threeD": {
-                        "methodNotificationUrl":notification_url,
+                        "methodNotificationUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/cres-handler",
                         "platformType": "01"
                     }
                 }
@@ -181,7 +181,7 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
                     "threeD": {
                         "methodCompletionInd": "U",
                         "version": resultInitPayment.paymentOption.card.threeD.version,
-                        "notificationURL":notification_url,
+                        "notificationURL":"https://3dsnuveiflow.netlify.app/.netlify/functions/cres-handler",
                         "merchantURL": "http://www.The-Merchant-Website-Fully-Quallified-URL.com",
                         "platformType": "02",
                         "v2AdditionalParams": {
@@ -291,33 +291,33 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
               }else{
                 var urlPayment = 'https://docs.nuvei.com/3Dsimulator/simulator.php?acsUrl=' + acsUrl +'&creq=' + cReq;
                 localStorage.setItem('nuvei_final_payload', JSON.stringify({
-                      sessionToken: resultPayment.sessionToken,
-                      merchantId,
-                      merchantSiteId,
-                      clientRequestId,
-                      userTokenId: "asdasd", // O el que estés usando
-                      relatedTransactionId: resultInitPayment.transactionId,
-                      currency,
-                      amount,
-                      card: {
-                        cardNumber,
-                        cardHolderName,
-                        expirationMonth,
-                        expirationYear,
-                        CVV
-                      },
-                      billingAddress: {
-                        firstName: "santiago",
-                        lastName: "gomez",
-                        address: "Cra falsa 123",
-                        city: "Bogota",
-                        country: "CO",
-                        email: "santiago.gomez@nuvei.com"
-                      },
-                      deviceDetails: {
-                        ipAddress: "200.118.62.71"
-                      }
-                    }));
+                  sessionToken: resultPayment.sessionToken,
+                  merchantId: merchant_id,
+                  merchantSiteId: merchant_site_id,
+                  clientRequestId: client_request_id,
+                  userTokenId: "asdasd",
+                  relatedTransactionId: resultInitPayment.transactionId,
+                  currency: currency,
+                  amount: amount,
+                  card: {
+                    cardNumber: cardNumber,
+                    cardHolderName: cardHolderName,
+                    expirationMonth: expirationMonth,
+                    expirationYear: expirationYear,
+                    CVV: CVV
+                  },
+                  billingAddress: {
+                    firstName: "santiago",
+                    lastName: "gomez",
+                    address: "Cra falsa 123",
+                    city: "Bogota",
+                    country: "CO",
+                    email: "santiago.gomez@nuvei.com"
+                  },
+                  deviceDetails: {
+                    ipAddress: "200.118.62.71"
+                  }
+                }));
 
                 window.location.href = urlPayment;
               }
