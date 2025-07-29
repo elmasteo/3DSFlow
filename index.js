@@ -200,7 +200,7 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
                         },
                         "browserDetails": {
                             "acceptHeader": "text/html,application/xhtml+xml",
-                            "ip": "200.118.62.71",
+                            "ip": "18.208.88.157",
                             "javaEnabled": "TRUE",
                             "javaScriptEnabled": "TRUE",
                             "language": "EN",
@@ -249,7 +249,7 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
                 "email": "santiago.gomez@nuvei.com"
             },
             "deviceDetails": {
-                "ipAddress": "200.118.62.71"
+                "ipAddress": "18.208.88.157"
             }
         });
 
