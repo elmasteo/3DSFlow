@@ -320,9 +320,10 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
                 const transactionDataStr = JSON.stringify(transactionData);
 
                 function toBase64(str) {
-                  const bytes = new TextEncoder().encode(str);
-                  const binary = Array.from(bytes, b => String.fromCharCode(b)).join('');
-                  return btoa(binary);
+                  return btoa(unescape(encodeURIComponent(str)))
+                    .replace(/\+/g, '-')  // base64url
+                    .replace(/\//g, '_')
+                    .replace(/=+$/, '');
                 }
 
                 const encodedTransactionData = toBase64(JSON.stringify(transactionData));

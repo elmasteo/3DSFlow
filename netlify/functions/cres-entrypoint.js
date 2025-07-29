@@ -12,9 +12,9 @@ exports.handler = async (event) => {
       <script>
         (async () => {
           function fromBase64(str) {
-          const binary = atob(str);
-          const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
-          return new TextDecoder().decode(bytes);
+          str = str.replace(/-/g, '+').replace(/_/g, '/');
+          while (str.length % 4) str += '=';
+          return decodeURIComponent(escape(atob(str)));
         }
 
 
