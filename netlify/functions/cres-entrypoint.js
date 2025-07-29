@@ -13,7 +13,7 @@ exports.handler = async (event) => {
         (async () => {
           function fromBase64(str) {
           try {
-            return decodeURIComponent(escape(atob(str)));
+            return atob(str);
           } catch (e) {
             console.error("Base64 decoding error:", e);
             return null;
