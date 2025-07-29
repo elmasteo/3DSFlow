@@ -325,18 +325,17 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
                   for (const b of bytes) {
                     binary += String.fromCharCode(b);
                   }
-                  return btoa(binary);
+                  return btoa(binary); // No uses encodeURIComponent aquí
                 }
 
-                const encodedTransactionData = encodeURIComponent(toBase64(transactionDataStr));
-                const encodedSecret = encodeURIComponent(toBase64(merchant_secret_key));
+                const encodedTransactionData = toBase64(transactionDataStr);
+                const encodedSecret = toBase64(merchant_secret_key);
 
                 const callbackUrl = `https://3dsnuveiflow.netlify.app/.netlify/functions/cres-entrypoint?data=${encodedTransactionData}&key=${encodedSecret}`;
-
-                // Redirección hacia simulador
                 const urlPayment = `https://docs.nuvei.com/3Dsimulator/simulator.php?acsUrl=${acsUrl}&creq=${cReq}&callback=${encodeURIComponent(callbackUrl)}`;
 
                 window.location.href = urlPayment;
+
 
 
               }

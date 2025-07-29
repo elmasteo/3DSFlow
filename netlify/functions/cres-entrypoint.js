@@ -12,40 +12,42 @@ exports.handler = async (event) => {
       <script>
         (async () => {
           function fromBase64(str) {
-            return new TextDecoder().decode(Uint8Array.from(atob(str), c => c.charCodeAt(0)));
+          const binary = atob(str); // Decode Base64 to binary string
+          const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
+          return new TextDecoder().decode(bytes); // Convert bytes to UTF-8 string
+        }
+
+        const params = new URLSearchParams(window.location.search);
+        const cres = params.get("cres");
+        const encodedTransactionData = params.get("data");
+        const encodedSecret = params.get("key");
+
+        const output = document.getElementById("output");
+
+        try {
+          const transactionData = JSON.parse(fromBase64(encodedTransactionData));
+          const merchantSecretKey = fromBase64(encodedSecret);
+
+          console.log("transactionData:", transactionData);
+          console.log("merchantSecretKey:", merchantSecretKey);
+
+          if (!cres || !transactionData || !merchantSecretKey) {
+            output.textContent = "Faltan datos.";
+            return;
           }
 
-          const params = new URLSearchParams(window.location.search);
-          const cres = params.get("cres");
-          const encodedTransactionData = params.get("data");
-          const encodedSecret = params.get("key");
+          const res = await fetch("/.netlify/functions/cres-handler", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ cres, transactionData, merchantSecretKey })
+          });
 
-          const output = document.getElementById("output");
+          const data = await res.json();
+          output.textContent = JSON.stringify(data, null, 2);
+        } catch (err) {
+          output.textContent = "Error al procesar el pago: " + err.message;
+        }
 
-          try {
-            const transactionData = JSON.parse(fromBase64(encodedTransactionData));
-            const merchantSecretKey = fromBase64(encodedSecret);
-
-            console.log("transactionData:", transactionData);
-            console.log("merchantSecretKey:", merchantSecretKey);
-            console.log("Base64 transactionData:", encodedTransactionData);
-
-            if (!cres || !transactionData || !merchantSecretKey) {
-              output.textContent = "Faltan datos.";
-              return;
-            }
-
-            const res = await fetch("/.netlify/functions/cres-handler", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ cres, transactionData, merchantSecretKey })
-            });
-
-            const data = await res.json();
-            output.textContent = JSON.stringify(data, null, 2);
-          } catch (err) {
-            output.textContent = "Error al procesar el pago: " + err.message;
-          }
         })();
       </script>
     </body>
