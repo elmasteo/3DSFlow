@@ -7,9 +7,8 @@ exports.handler = async (event) => {
   }
 
   try {
-    const body = JSON.parse(event.body);
-
-    const { cres, transactionData } = body;
+    const params = new URLSearchParams(event.body);
+    const cres = params.get('cres');
 
     if (!cres || !transactionData) {
       return {
