@@ -12,7 +12,7 @@ exports.handler = async (event) => {
       <script>
         (async () => {
           function fromBase64(str) {
-          return decodeURIComponent(atob(str));
+          return decodeURIComponent(escape(atob(str)));
         }
 
           const params = new URLSearchParams(window.location.search);
