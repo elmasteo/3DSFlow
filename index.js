@@ -290,6 +290,35 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
                 document.getElementById('result').innerHTML = JSON.stringify(resultPayment, null, 2);
               }else{
                 var urlPayment = 'https://docs.nuvei.com/3Dsimulator/simulator.php?acsUrl=' + acsUrl +'&creq=' + cReq;
+                localStorage.setItem('nuvei_final_payload', JSON.stringify({
+                      sessionToken: resultPayment.sessionToken,
+                      merchantId,
+                      merchantSiteId,
+                      clientRequestId,
+                      userTokenId: "asdasd", // O el que estés usando
+                      relatedTransactionId: resultInitPayment.transactionId,
+                      currency,
+                      amount,
+                      card: {
+                        cardNumber,
+                        cardHolderName,
+                        expirationMonth,
+                        expirationYear,
+                        CVV
+                      },
+                      billingAddress: {
+                        firstName: "santiago",
+                        lastName: "gomez",
+                        address: "Cra falsa 123",
+                        city: "Bogota",
+                        country: "CO",
+                        email: "santiago.gomez@nuvei.com"
+                      },
+                      deviceDetails: {
+                        ipAddress: "200.118.62.71"
+                      }
+                    }));
+
                 window.location.href = urlPayment;
               }
               
