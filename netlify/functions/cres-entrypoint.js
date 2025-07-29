@@ -29,7 +29,6 @@ exports.handler = async (event) => {
             console.log("transactionData:", transactionData);
             console.log("merchantSecretKey:", merchantSecretKey);
             console.log("Base64 transactionData:", encodedTransactionData);
-            console.log("Decoded transactionData:", decodeURIComponent(escape(atob(encodedTransactionData))));
 
             if (!cres || !transactionData || !merchantSecretKey) {
               output.textContent = "Faltan datos.";
