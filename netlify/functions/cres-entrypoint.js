@@ -12,10 +12,8 @@ exports.handler = async (event) => {
       <script>
         (async () => {
           function fromBase64(str) {
-          const binary = atob(str); // Decode Base64 to binary string
-          const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
-          return new TextDecoder().decode(bytes); // Convert bytes to UTF-8 string
-        }
+        return decodeURIComponent(escape(atob(str)));
+      }
 
         const params = new URLSearchParams(window.location.search);
         const cres = params.get("cres");
