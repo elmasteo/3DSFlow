@@ -124,7 +124,7 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
                     "expirationYear": expirationYear,
                     "CVV": CVV,
                     "threeD": {
-                        "methodNotificationUrl":"https://3dsnuveiflow.netlify.app/cres-callback.html",
+                        "methodNotificationUrl":"https://3dsnuveiflow.netlify.app/cres-callback/",
                         "platformType": "01"
                     }
                 }
@@ -180,7 +180,7 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
                     "threeD": {
                         "methodCompletionInd": "U",
                         "version": resultInitPayment.paymentOption.card.threeD.version,
-                        "notificationURL":"https://3dsnuveiflow.netlify.app/cres-callback.html",
+                        "notificationURL":"https://3dsnuveiflow.netlify.app/cres-callback/",
                         "merchantURL": "http://www.The-Merchant-Website-Fully-Quallified-URL.com",
                         "platformType": "02",
                         "v2AdditionalParams": {
