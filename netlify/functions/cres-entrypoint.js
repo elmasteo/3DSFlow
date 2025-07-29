@@ -1,9 +1,4 @@
 exports.handler = async (event) => {
-  const query = event.queryStringParameters;
-  const cres = query?.cres;
-  const encodedData = query?.data;
-  const encodedKey = query?.key;
-
   const html = `
     <!DOCTYPE html>
     <html lang="es">
@@ -16,9 +11,10 @@ exports.handler = async (event) => {
       <pre id="output"></pre>
       <script>
         (async () => {
-          const cres = "${cres}";
-          const encodedTransactionData = "${encodedData}";
-          const encodedSecret = "${encodedKey}";
+          const params = new URLSearchParams(window.location.search);
+          const cres = params.get("cres");
+          const encodedTransactionData = params.get("data");
+          const encodedSecret = params.get("key");
 
           const output = document.getElementById("output");
 

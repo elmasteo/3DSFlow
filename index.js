@@ -314,16 +314,20 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
                   },
                   deviceDetails: {
                     ipAddress: "200.118.62.71"
-                  },
+                  }
                 };
 
                 const encodedTransactionData = encodeURIComponent(btoa(JSON.stringify(transactionData)));
                 const encodedSecret = encodeURIComponent(btoa(merchant_secret_key));
 
+                // Redirección final tras completar 3DS
                 const callbackUrl = `https://3dsnuveiflow.netlify.app/.netlify/functions/cres-entrypoint?data=${encodedTransactionData}&key=${encodedSecret}`;
+
+                // Redirección hacia simulador
                 const urlPayment = `https://docs.nuvei.com/3Dsimulator/simulator.php?acsUrl=${acsUrl}&creq=${cReq}&callback=${encodeURIComponent(callbackUrl)}`;
 
                 window.location.href = urlPayment;
+
 
               }
               
