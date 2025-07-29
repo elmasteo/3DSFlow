@@ -12,9 +12,9 @@ exports.handler = async (event) => {
       <script>
         (async () => {
           function fromBase64(str) {
-          const binary = atob(str); // decodifica base64 a binario
+          const binary = atob(str);
           const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
-          return new TextDecoder().decode(bytes); // convierte bytes a UTF-8 string
+          return new TextDecoder().decode(bytes);
         }
 
 

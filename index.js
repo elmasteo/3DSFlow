@@ -320,25 +320,21 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
                 const transactionDataStr = JSON.stringify(transactionData);
 
                 function toBase64(str) {
-                  const bytes = new TextEncoder().encode(str); // codifica a UTF-8
+                  const bytes = new TextEncoder().encode(str);
                   const binary = Array.from(bytes, b => String.fromCharCode(b)).join('');
-                  return btoa(binary); // codifica el binario como base64
+                  return btoa(binary);
                 }
 
-                const encodedTransactionData = toBase64(transactionDataStr);
+                const encodedTransactionData = toBase64(JSON.stringify(transactionData));
                 const encodedSecret = toBase64(merchant_secret_key);
 
-                const callbackUrl = `https://3dsnuveiflow.netlify.app/.netlify/functions/cres-entrypoint?data=${encodedTransactionData}&key=${encodedSecret}`;
+                const callbackUrl = `https://3dsnuveiflow.netlify.app/.netlify/functions/cres-entrypoint?data=${encodeURIComponent(encodedTransactionData)}&key=${encodeURIComponent(encodedSecret)}`;
+
                 const urlPayment = `https://docs.nuvei.com/3Dsimulator/simulator.php?acsUrl=${acsUrl}&creq=${cReq}&callback=${encodeURIComponent(callbackUrl)}`;
-
                 window.location.href = urlPayment;
-
-
 
               }
               
-              
-
           }else{
             document.getElementById('formulario').style.display = 'block';
             document.getElementById('loader').style.display = 'none';
