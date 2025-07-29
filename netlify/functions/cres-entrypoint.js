@@ -1,5 +1,8 @@
 exports.handler = async (event) => {
-  const cres = new URLSearchParams(event.queryStringParameters).get("cres");
+  const query = event.queryStringParameters;
+  const cres = query?.cres;
+  const encodedData = query?.data;
+  const encodedKey = query?.key;
 
   const html = `
     <!DOCTYPE html>
@@ -14,17 +17,20 @@ exports.handler = async (event) => {
       <script>
         (async () => {
           const cres = "${cres}";
-          const transactionData = JSON.parse(localStorage.getItem('nuvei_final_payload'));
-          const merchantSecretKey = localStorage.getItem('merchant_secret_key');
+          const encodedTransactionData = "${encodedData}";
+          const encodedSecret = "${encodedKey}";
 
           const output = document.getElementById("output");
 
-          if (!cres || !transactionData || !merchantSecretKey) {
-            output.textContent = "Faltan datos: verifique que el proceso fue iniciado desde el mismo navegador.";
-            return;
-          }
-
           try {
+            const transactionData = JSON.parse(atob(decodeURIComponent(encodedTransactionData)));
+            const merchantSecretKey = atob(decodeURIComponent(encodedSecret));
+
+            if (!cres || !transactionData || !merchantSecretKey) {
+              output.textContent = "Faltan datos.";
+              return;
+            }
+
             const res = await fetch("/.netlify/functions/cres-handler", {
               method: "POST",
               headers: { "Content-Type": "application/json" },

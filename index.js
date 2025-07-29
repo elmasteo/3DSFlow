@@ -288,8 +288,7 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
                 document.getElementById('result').style.display = 'block';
                 document.getElementById('result').innerHTML = JSON.stringify(resultPayment, null, 2);
               }else{
-                var urlPayment = 'https://docs.nuvei.com/3Dsimulator/simulator.php?acsUrl=' + acsUrl +'&creq=' + cReq;
-                localStorage.setItem('nuvei_final_payload', JSON.stringify({
+                const transactionData = {
                   sessionToken: resultPayment.sessionToken,
                   merchantId: merchant_id,
                   merchantSiteId: merchant_site_id,
@@ -316,10 +315,16 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
                   deviceDetails: {
                     ipAddress: "200.118.62.71"
                   },
-                  merchantSecretKey: merchant_secret_key // Asegúrate de tener esta variable en JS
-                }));
+                };
+
+                const encodedTransactionData = encodeURIComponent(btoa(JSON.stringify(transactionData)));
+                const encodedSecret = encodeURIComponent(btoa(merchant_secret_key));
+
+                const callbackUrl = `https://3dsnuveiflow.netlify.app/.netlify/functions/cres-entrypoint?data=${encodedTransactionData}&key=${encodedSecret}`;
+                const urlPayment = `https://docs.nuvei.com/3Dsimulator/simulator.php?acsUrl=${acsUrl}&creq=${cReq}&callback=${encodeURIComponent(callbackUrl)}`;
 
                 window.location.href = urlPayment;
+
               }
               
               
