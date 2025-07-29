@@ -22,9 +22,10 @@ exports.handler = async (event) => {
             const transactionData = JSON.parse(decodeURIComponent(escape(atob(encodedTransactionData))));
             const merchantSecretKey = decodeURIComponent(escape(atob(encodedSecret)));
 
-            console.log(JSON.stringify(transactionData));                 // Debe ser legible
-            console.log(btoa(unescape(encodeURIComponent(...)));         // Debe verse como base64
-            console.log(atob(...));
+            console.log("transactionData:", transactionData);
+            console.log("merchantSecretKey:", merchantSecretKey);
+            console.log("Base64 transactionData:", encodedTransactionData);
+            console.log("Decoded transactionData:", decodeURIComponent(escape(atob(encodedTransactionData))));
 
             if (!cres || !transactionData || !merchantSecretKey) {
               output.textContent = "Faltan datos.";
