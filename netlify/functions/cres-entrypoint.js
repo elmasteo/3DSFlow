@@ -19,8 +19,8 @@ exports.handler = async (event) => {
           const output = document.getElementById("output");
 
           try {
-            const transactionData = JSON.parse(decodeURIComponent(escape(atob(encodedTransactionData))));
-            const merchantSecretKey = decodeURIComponent(escape(atob(encodedSecret)));
+            const transactionData = JSON.parse(decodeURIComponent(atob(encodedTransactionData)));
+            const merchantSecretKey = decodeURIComponent(atob(encodedSecret));
 
             console.log("transactionData:", transactionData);
             console.log("merchantSecretKey:", merchantSecretKey);
