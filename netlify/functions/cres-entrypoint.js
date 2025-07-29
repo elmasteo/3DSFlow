@@ -12,13 +12,9 @@ exports.handler = async (event) => {
       <script>
         (async () => {
           function fromBase64(str) {
-          try {
-            return atob(str);
-          } catch (e) {
-            console.error("Base64 decoding error:", e);
-            return null;
-          }
+          return decodeURIComponent(atob(str));
         }
+
           const params = new URLSearchParams(window.location.search);
           const cres = params.get("cres");
           const encodedTransactionData = params.get("data");

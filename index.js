@@ -319,7 +319,7 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
 
                 const transactionDataStr = JSON.stringify(transactionData);
                 function toBase64(str) {
-                  return btoa(str); // Solo si str no tiene caracteres fuera de Latin1
+                  return btoa(encodeURIComponent(str));
                 }
 
                 const encodedTransactionData = toBase64(transactionDataStr);
