@@ -11,6 +11,14 @@ exports.handler = async (event) => {
       <pre id="output"></pre>
       <script>
         (async () => {
+          function fromBase64(str) {
+          try {
+            return decodeURIComponent(escape(atob(str)));
+          } catch (e) {
+            console.error("Base64 decoding error:", e);
+            return null;
+          }
+        }
           const params = new URLSearchParams(window.location.search);
           const cres = params.get("cres");
           const encodedTransactionData = params.get("data");
@@ -19,8 +27,8 @@ exports.handler = async (event) => {
           const output = document.getElementById("output");
 
           try {
-            const transactionData = JSON.parse(decodeURIComponent(atob(encodedTransactionData)));
-            const merchantSecretKey = decodeURIComponent(atob(encodedSecret));
+            const transactionData = JSON.parse(fromBase64(encodedTransactionData));
+            const merchantSecretKey = fromBase64(encodedSecret);
 
             console.log("transactionData:", transactionData);
             console.log("merchantSecretKey:", merchantSecretKey);
