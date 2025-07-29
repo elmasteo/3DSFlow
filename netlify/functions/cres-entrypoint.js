@@ -1,60 +1,62 @@
-const querystring = require("querystring");
+exports.handler = async (event) => {
+  const html = `
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <title>Procesando CRES</title>
+    </head>
+    <body>
+      <h2>Procesando validación 3DS...</h2>
+      <pre id="output"></pre>
+      <script>
+      (async () => {
+        function fromBase64(str) {
+          str = str.replace(/-/g, '+').replace(/_/g, '/');
+          while (str.length % 4) str += '=';
+          return decodeURIComponent(escape(atob(str)));
+        }
 
-exports.handler = async (event, context) => {
-  try {
-    // Asegúrate de que sea POST
-    if (event.httpMethod !== "POST") {
-      return {
-        statusCode: 405,
-        body: "Method Not Allowed"
-      };
-    }
+        const params = new URLSearchParams(window.location.search);
+        const cres = params.get("cres");
+        const encodedTransactionData = params.get("data");
+        const encodedSecret = params.get("key");
 
-    // Content-Type: application/x-www-form-urlencoded
-    const formData = querystring.parse(event.body);
-    const cres = formData.cres;
+        const output = document.getElementById("output");
 
-    if (!cres) {
-      return {
-        statusCode: 400,
-        body: "Falta el parámetro 'cres' en el cuerpo POST"
-      };
-    }
+        if (!encodedTransactionData || !encodedSecret || !cres) {
+          output.textContent = "Faltan parámetros requeridos en la URL.";
+          return;
+        }
 
-    // Ahora obtén los parámetros adicionales desde la URL
-    const queryParams = event.queryStringParameters;
-    const encodedTransactionData = queryParams.data;
-    const encodedSecret = queryParams.key;
+        try {
+          const transactionData = JSON.parse(fromBase64(encodedTransactionData));
+          const merchantSecretKey = fromBase64(encodedSecret);
 
-    if (!encodedTransactionData || !encodedSecret) {
-      return {
-        statusCode: 400,
-        body: "Faltan parámetros requeridos en la URL"
-      };
-    }
+          console.log("transactionData:", transactionData);
+          console.log("merchantSecretKey:", merchantSecretKey);
 
-    const transactionData = JSON.parse(
-      Buffer.from(encodedTransactionData, "base64").toString("utf-8")
-    );
-    const merchantSecretKey = Buffer.from(encodedSecret, "base64").toString("utf-8");
+          const res = await fetch("/.netlify/functions/cres-handler", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ cres, transactionData, merchantSecretKey })
+          });
 
-    // Aquí puedes continuar con la lógica del llamado a payment
-    console.log("cres:", cres);
-    console.log("transactionData:", transactionData);
-    console.log("merchantSecretKey:", merchantSecretKey);
+          const data = await res.json();
+          output.textContent = JSON.stringify(data, null, 2);
+        } catch (err) {
+          output.textContent = "Error al procesar el pago: " + err.message;
+        }
+      })();
+      </script>
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        status: "Procesado correctamente",
-        cres,
-        transactionData,
-      })
-    };
-  } catch (err) {
-    return {
-      statusCode: 500,
-      body: "Error interno: " + err.message
-    };
-  }
+    </body>
+    </html>
+  `;
+
+  return {
+    statusCode: 200,
+    headers: { "Content-Type": "text/html" },
+    body: html
+  };
 };
