@@ -332,6 +332,10 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
                 const callbackUrl = `https://3dsnuveiflow.netlify.app/.netlify/functions/cres-entrypoint?data=${encodeURIComponent(encodedTransactionData)}&key=${encodeURIComponent(encodedSecret)}`;
 
                 const urlPayment = `https://docs.nuvei.com/3Dsimulator/simulator.php?acsUrl=${acsUrl}&creq=${cReq}&callback=${encodeURIComponent(callbackUrl)}`;
+
+                sessionStorage.setItem("transactionData", encodedTransactionData);
+                sessionStorage.setItem("merchantSecretKey", encodedSecret);
+                
                 window.location.href = urlPayment;
 
               }
