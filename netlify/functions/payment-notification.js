@@ -92,6 +92,7 @@ exports.handler = async function (event) {
 <head>
   <meta charset="UTF-8" />
   <title>Última Notificación de Nuvei</title>
+  <link rel="icon" href="https://docs.nuvei.com/wp-content/themes/manual-child/img/favicons/cropped-favicon-nuvei-32x32.png" sizes="32x32">
   <style>
     body {
       font-family: sans-serif;
