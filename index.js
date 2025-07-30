@@ -115,7 +115,7 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
             "clientRequestId": client_request_id,
             "currency": currency,
             "amount": amount,
-            "userTokenId": "asdasd",
+            "userTokenId": client_request_id,
             "paymentOption": {
                 "card": {
                     "cardNumber": cardNumber,
