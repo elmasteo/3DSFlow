@@ -374,7 +374,7 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
             .then(response => response.json())
             .then(resultPayment => {
 
-            if (resultPayment.status == 'SUCCESS'){
+            if (resultPayment.status == 'REDIRECT'){
 
               var urlChallenge = resultPayment.paymentOption.redirectUrl;
               if(!urlChallenge){
