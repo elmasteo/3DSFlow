@@ -1,9 +1,13 @@
+const fs = require("fs");
+const path = require("path");
 const querystring = require("querystring");
 
-let lastNotificationData = null; // memoria temporal
+const tempFilePath = path.join("/tmp", "lastNotification.json");
 
 exports.handler = async (event) => {
-  if (event.httpMethod === "POST") {
+  const method = event.httpMethod;
+
+  if (method === "POST") {
     const contentType = event.headers["content-type"] || event.headers["Content-Type"];
     if (!contentType.includes("application/x-www-form-urlencoded")) {
       return {
@@ -12,27 +16,38 @@ exports.handler = async (event) => {
       };
     }
 
-    // Parsear el cuerpo
     const parsedData = querystring.parse(event.body);
-    lastNotificationData = parsedData; // Guardar en memoria temporal
+
+    // Guardar en archivo temporal
+    try {
+      fs.writeFileSync(tempFilePath, JSON.stringify(parsedData, null, 2));
+    } catch (err) {
+      return {
+        statusCode: 500,
+        body: "Error al guardar datos: " + err.message,
+      };
+    }
 
     return {
       statusCode: 200,
-      body: "Notificación recibida correctamente.",
+      body: "Notificación guardada exitosamente.",
     };
   }
 
-  // Cuando se hace GET desde el navegador
-  if (event.httpMethod === "GET") {
-    if (!lastNotificationData) {
+  if (method === "GET") {
+    let data;
+    try {
+      const fileContent = fs.readFileSync(tempFilePath, "utf8");
+      data = JSON.parse(fileContent);
+    } catch (err) {
       return {
         statusCode: 200,
         body: `
           <html>
-            <head><title>Esperando datos...</title></head>
+            <head><title>Sin datos</title></head>
             <body style="font-family: sans-serif;">
-              <h2>No hay datos recientes de Nuvei.</h2>
-              <p>Es posible que aún no se haya recibido la notificación.</p>
+              <h2>No hay datos de notificación recientes.</h2>
+              <p>Aún no se ha recibido un POST con datos desde Nuvei.</p>
             </body>
           </html>
         `,
@@ -40,9 +55,9 @@ exports.handler = async (event) => {
       };
     }
 
-    // Mostrar los datos visualmente en pantalla
     return {
       statusCode: 200,
+      headers: { "Content-Type": "text/html" },
       body: `
         <html>
           <head>
@@ -68,18 +83,17 @@ exports.handler = async (event) => {
               .status {
                 font-size: 1.5rem;
                 font-weight: bold;
-                color: ${lastNotificationData.Status === "APPROVED" ? "green" : "red"};
+                color: ${data.Status === "APPROVED" ? "green" : "red"};
               }
             </style>
           </head>
           <body>
             <h1>Resultado de la Transacción</h1>
-            <p class="status">Estado: ${lastNotificationData.Status || "Desconocido"}</p>
-            <pre>${JSON.stringify(lastNotificationData, null, 2)}</pre>
+            <p class="status">Estado: ${data.Status || "Desconocido"}</p>
+            <pre>${JSON.stringify(data, null, 2)}</pre>
           </body>
         </html>
       `,
-      headers: { "Content-Type": "text/html" },
     };
   }
 
