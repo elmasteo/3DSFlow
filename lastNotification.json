@@ -1,6 +1,6 @@
 {
   "ppp_status": "PENDING",
-  "Status": "PENDING",
+  "Status": "UPDATE",
   "ExErrCode": "0",
   "ErrCode": "0",
   "errApmCode": "0",
@@ -79,13 +79,13 @@
   "merchant_status": "",
   "action": "",
   "requestVersion": "",
-  "message": "PENDING",
+  "message": "UPDATE",
   "merchantLocale": "",
   "unknownParameters": "",
   "payment_method": "apmgw_ACH",
   "ID": "",
   "merchant_id": "1132873875277722767",
-  "responseTimeStamp": "2025-07-30.20:07:56",
+  "responseTimeStamp": "2025-07-30.20:07:57",
   "buyButtonProductId": "",
   "webMasterId": "",
   "appliedPromotions": "",
@@ -139,6 +139,9 @@
   "type": "DEPOSIT",
   "clientRequestId": "1070986176",
   "relatedTransactionId": "",
+  "apmPayerInfo": "{\"StatusInfo\":\"{ StatusCode: , info: }\"}",
+  "representmentInformation": "Account Linked",
+  "sessionId": "cf2d0cd587239d87b041b3b7cd60",
   "responsechecksum": "3a2155455efd21b06052fc7eeb2acde0e309d2da3e398caa470a385c08218d2b",
-  "advanceResponseChecksum": "b4dcbdf3edc2d00a9d888d709d6d10354169df9c90513694a642a25137cad828"
+  "advanceResponseChecksum": "f34c77bb1a5bf7b05eb323f3be553bc620bc228751a33dc146f159683149ea18"
 }
