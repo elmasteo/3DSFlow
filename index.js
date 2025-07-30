@@ -159,6 +159,102 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
             const cadenaPayment =CryptoJS.SHA256(merchant_id + merchant_site_id + client_request_id + amount.toString() + currency + timestamp + merchant_secret_key);
             const checksumPayment = cadenaPayment.toString();
 
+            var jsonPayment = JSON.stringify({
+        "sessionToken": resultInitPayment.sessionToken,
+        "merchantId": merchant_id,
+        "merchantSiteId": merchant_site_id,
+        "clientRequestId": client_request_id,
+        "timeStamp": timestamp,
+        "userTokenId":client_request_id,
+        "checksum": checksumPayment,
+        "currency": currency,
+        "amount": amount,
+        "relatedTransactionId": resultInitPayment.transactionId,
+        "paymentFlow":"redirect",
+        "paymentOption": {
+            "card": {
+                "cardNumber": cardNumber,
+                "cardHolderName": cardHolderName,
+                "expirationMonth": expirationMonth,
+                "expirationYear": expirationYear,
+                "CVV": CVV,
+                "threeD": {
+                    "methodCompletionInd": "U",
+                    "version": resultInitPayment.paymentOption.card.threeD.version,
+                    "notificationURL": "https://hkdk.events/b3bLhoMOWcn0",
+                    "merchantURL": "http://www.The-Merchant-Website-Fully-Quallified-URL.com",
+                    "platformType": "02",
+                    "v2AdditionalParams": {
+                        "challengePreference": "01",
+                        "deliveryEmail": "santiago.gomez@nuvei.com",
+                        "deliveryTimeFrame": "03",
+                        "giftCardAmount": "1",
+                        "giftCardCount": "41",
+                        "giftCardCurrency": "CLP",
+                        "preOrderDate": "20220511",
+                        "preOrderPurchaseInd": "02",
+                        "reorderItemsInd": "01",
+                        "shipIndicator": "06",
+                        "rebillExpiry": "20200101",
+                        "rebillFrequency": "13",
+                        "challengeWindowSize": "05"
+                    },
+                    "browserDetails": {
+                        "acceptHeader": "text/html,application/xhtml+xml",
+                        "ip": "200.118.62.71",
+                        "javaEnabled": "TRUE",
+                        "javaScriptEnabled": "TRUE",
+                        "language": "EN",
+                        "colorDepth": "48",
+                        "screenHeight": "400",
+                        "screenWidth": "600",
+                        "timeZone": "0",
+                        "userAgent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47"
+                    },
+                    "account": {
+                        "age": "05",
+                        "lastChangeDate": "20190220",
+                        "lastChangeInd": "04",
+                        "registrationDate": "20190221",
+                        "passwordChangeDate": "20190222",
+                        "resetInd": "01",
+                        "purchasesCount6M": "6",
+                        "addCardAttempts24H": "24",
+                        "transactionsCount24H": "23",
+                        "transactionsCount1Y": "998",
+                        "cardSavedDate": "20190223",
+                        "cardSavedInd": "02",
+                        "addressFirstUseDate": "20190224",
+                        "addressFirstUseInd": "03",
+                        "nameInd": "02",
+                        "suspiciousActivityInd": "01"
+                    },
+                     "externalRiskScore": "100"
+                }
+            }
+        },
+        "billingAddress": {
+            "firstName": "santiago",
+            "lastName": "gomez",
+            "address": "Cra falsa 123",
+            "city": "Bogota",
+            "country": "CO",
+            "email": "santiago.gomez@nuvei.com"
+        },
+        "shippingAddress": {
+            "firstName": "santiago",
+            "lastName": "gomez",
+            "address": "Cra falsa 123",
+            "city": "Boota",
+            "country": "CO",
+            "email": "santiago.gomez@nuvei.com"
+        },
+        "deviceDetails": {
+            "ipAddress": "200.118.62.71"
+          }
+      });
+
+/*
           var jsonPayment = JSON.stringify({
             
             "sessionToken": resultInitPayment.sessionToken,
@@ -252,7 +348,7 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
                 "ipAddress": "18.208.88.157"
             }
         });
-
+*/
         }else{
             document.getElementById('formulario').style.display = 'block';
             document.getElementById('loader').style.display = 'none';
@@ -280,6 +376,16 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
 
             if (resultPayment.status == 'SUCCESS'){
 
+              var urlChallenge = resultPayment.paymentOption.redirectUrl;
+              if(!urlChallenge){
+                document.getElementById('formulario').style.display = 'block';
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('result').style.display = 'block';
+                document.getElementById('result').innerHTML = JSON.stringify(resultPayment, null, 2);
+              }else{
+
+                window.location.href = urlChallenge;
+/*
               var acsUrl = resultPayment.paymentOption.card.threeD.acsUrl;
               var cReq = resultPayment.paymentOption.card.threeD.cReq;
               if(!acsUrl || !cReq){
@@ -337,7 +443,7 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
                 sessionStorage.setItem("merchantSecretKey", encodedSecret);
                 
                 window.location.href = urlPayment;
-
+*/
               }
               
           }else{
