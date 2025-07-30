@@ -1,6 +1,6 @@
 {
   "ppp_status": "PENDING",
-  "Status": "PENDING",
+  "Status": "UPDATE",
   "ExErrCode": "0",
   "ErrCode": "0",
   "errApmCode": "0",
@@ -79,7 +79,7 @@
   "merchant_status": "",
   "action": "",
   "requestVersion": "",
-  "message": "PENDING",
+  "message": "UPDATE",
   "merchantLocale": "",
   "unknownParameters": "",
   "payment_method": "apmgw_ACH",
@@ -139,6 +139,9 @@
   "type": "DEPOSIT",
   "clientRequestId": "1070986176",
   "relatedTransactionId": "",
+  "apmPayerInfo": "{\"StatusInfo\":\"{ StatusCode: , info: }\"}",
+  "representmentInformation": "Account Linked",
+  "sessionId": "cf7e1133cd72ee30cdd875a53a83",
   "responsechecksum": "83e4801340ea7b5f8e3e2fd46b590a86a224064daefca4c31a6bf5a48d5688b6",
-  "advanceResponseChecksum": "e2eb086112df7c8ed02a09e65b0ea0c4582198b225ad67d006d88018e229d552"
+  "advanceResponseChecksum": "d17f94cca4221ab5232a85aa09abf75de19ab6cb80ac92458b4c9b8b9e29c0dd"
 }
