@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Resultado del Pago</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background: #f9f9f9;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    pre {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Resultado del Pago</h1>
+  <pre id="output">Cargando datos...</pre>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const data = {};
+    for (const [key, value] of params.entries()) {
+      data[key] = decodeURIComponent(value);
+    }
+    document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+  </script>
+</body>
+</html>
