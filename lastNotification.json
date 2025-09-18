@@ -1,6 +1,6 @@
 {
-  "ppp_status": "PENDING",
-  "Status": "PENDING",
+  "ppp_status": "OK",
+  "Status": "APPROVED",
   "ExErrCode": "0",
   "ErrCode": "0",
   "errApmCode": "0",
@@ -79,13 +79,13 @@
   "merchant_status": "",
   "action": "",
   "requestVersion": "",
-  "message": "PENDING",
+  "message": "APPROVED",
   "merchantLocale": "",
   "unknownParameters": "",
   "payment_method": "apmgw_MBWAY",
   "ID": "",
   "merchant_id": "1132873875277722767",
-  "responseTimeStamp": "2025-09-18.12:59:10",
+  "responseTimeStamp": "2025-09-18.12:59:31",
   "buyButtonProductId": "",
   "webMasterId": "",
   "appliedPromotions": "",
@@ -141,6 +141,6 @@
   "clientRequestId": "20250918075900",
   "relatedTransactionId": "",
   "sessionId": "ce7d45f50572abcba5e70433c9c2",
-  "responsechecksum": "4a66935c388de16f76b1b0f7c44ddac3d33c77a7c19103e694eb658f0e150fd6",
-  "advanceResponseChecksum": "9ce122004a79bde36c3909b4513c648d5f195f655d8b2e445af7b36b75ea69cd"
+  "responsechecksum": "eb2905bff8d32448c5de78c9c7de60090b481f781832e2310302e4e6b01c459b",
+  "advanceResponseChecksum": "003e35b8ddf1bae18154552d2b546846a6eaf5c177c06b3ff28130fc7ea7fed1"
 }
