@@ -134,7 +134,7 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
             "successUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification",
             "failureUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification",
             "pendingUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification",
-            "notificationURL":"https://hkdk.events/y8uwj3x0mf2ba8",
+            "notificationUrl":"https://hkdk.events/y8uwj3x0mf2ba8",
             "appUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification"
           }
           });
@@ -264,7 +264,7 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
             "successUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification",
             "failureUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification",
             "pendingUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification",
-            "notificationURL":"https://hkdk.events/y8uwj3x0mf2ba8",
+            "notificationUrl":"https://hkdk.events/y8uwj3x0mf2ba8",
             "appUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification"
           }
       });
