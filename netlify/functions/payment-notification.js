@@ -119,7 +119,7 @@ exports.handler = async function (event) {
         if (!res.ok) throw new Error("Archivo aún no disponible");
         const data = await res.json();
 
-        document.querySelector("h2").textContent = "Última Notificación Recibida:";
+        document.querySelector("h2").textContent = "Last notification received:";
         document.getElementById("status").remove();
         document.getElementById("jsonOutput").textContent = JSON.stringify(data, null, 2);
       } catch (err) {
