@@ -116,9 +116,6 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
             "currency": currency,
             "amount": amount,
             "userTokenId": client_request_id,
-            "urlDetails"{
-                "notificationURL":"https://hkdk.events/y8uwj3x0mf2ba8"
-            },
             "paymentOption": {
                 "card": {
                     "cardNumber": cardNumber,
@@ -132,6 +129,14 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
                     }
                 }
             }
+            ,
+          "urlDetails":{
+            "successUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification",
+            "failureUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification",
+            "pendingUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification",
+            "notificationURL":"https://hkdk.events/y8uwj3x0mf2ba8",
+            "appUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification"
+          }
           });
 
            var initPaymentUrl = environment =='https://secure.safecharge.com/ppp/api/v1/getSessionToken.do' ? "https://secure.safecharge.com/ppp/api/v1/initPayment.do" :"https://ppp-test.nuvei.com/ppp/api/v1/initPayment.do";
