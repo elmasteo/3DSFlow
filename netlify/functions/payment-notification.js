@@ -91,7 +91,7 @@ exports.handler = async function (event) {
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Última Notificación de Nuvei</title>
+  <title>Last Notification from Nuvei</title>
   <link rel="icon" href="https://docs.nuvei.com/wp-content/themes/manual-child/img/favicons/cropped-favicon-nuvei-32x32.png" sizes="32x32">
   <style>
     body {
@@ -108,8 +108,8 @@ exports.handler = async function (event) {
   </style>
 </head>
 <body>
-  <h2>Cargando datos...</h2>
-  <div id="status">Esperando última notificación...</div>
+  <h2>Loading Data...</h2>
+  <div id="status">Loading last notification...</div>
   <pre id="jsonOutput"></pre>
 
   <script>
@@ -126,7 +126,7 @@ exports.handler = async function (event) {
         if (attempt < 10) {
           setTimeout(() => fetchFromGitHubAPI(attempt + 1), 1000);
         } else {
-          document.getElementById("status").textContent = "No se pudo cargar el archivo después de varios intentos.";
+          document.getElementById("status").textContent = "Can not load the file, something was wrong!";
         }
       }
     }

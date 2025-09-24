@@ -129,14 +129,6 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
                     }
                 }
             }
-            ,
-          "urlDetails":{
-            "successUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification",
-            "failureUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification",
-            "pendingUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification",
-            "notificationUrl":"https://hkdk.events/y8uwj3x0mf2ba8",
-            "appUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification"
-          }
           });
 
            var initPaymentUrl = environment =='https://secure.safecharge.com/ppp/api/v1/getSessionToken.do' ? "https://secure.safecharge.com/ppp/api/v1/initPayment.do" :"https://ppp-test.nuvei.com/ppp/api/v1/initPayment.do";
@@ -264,7 +256,7 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
             "successUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification",
             "failureUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification",
             "pendingUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification",
-            "notificationUrl":"https://hkdk.events/y8uwj3x0mf2ba8",
+            "notificationUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification",
             "appUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification"
           }
       });
