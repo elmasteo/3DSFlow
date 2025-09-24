@@ -251,6 +251,13 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
         },
         "deviceDetails": {
             "ipAddress": "200.118.62.71"
+          },
+          "urlDetails":{
+            "successUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification",
+            "failureUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification",
+            "pendingUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification",
+            "notificationURL":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification",
+            "appUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification"
           }
       });
 
