@@ -116,6 +116,9 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
             "currency": currency,
             "amount": amount,
             "userTokenId": client_request_id,
+            "urlDetails"{
+                "notificationURL":"https://hkdk.events/y8uwj3x0mf2ba8"
+            },
             "paymentOption": {
                 "card": {
                     "cardNumber": cardNumber,
@@ -256,7 +259,7 @@ const timestamp = `${fecha.getFullYear()}${padZero(fecha.getMonth() + 1)}${padZe
             "successUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification",
             "failureUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification",
             "pendingUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification",
-            "notificationURL":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification",
+            "notificationURL":"https://hkdk.events/y8uwj3x0mf2ba8",
             "appUrl":"https://3dsnuveiflow.netlify.app/.netlify/functions/payment-notification"
           }
       });
